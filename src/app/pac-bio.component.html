@@ -1,3 +1,47 @@
 <h1>
-  {{title}}
+    {{title}}
 </h1>
+
+<form>
+    <section class="pb_gridForm" [style.maxWidth]="(table.width || 100) + 'px'">
+
+        <div class="pb__gridFormRow">
+            <label class="pb__gridFormLabel">Location</label>
+            <div class="pb__gridFormInput">
+                <input type="text" [(ngModel)]="location" class="form-control" required
+                       placeholder="A1...H12"/>
+                <div *ngIf=locationState class="pb__gridFormFeedback" *ngIf="locationState">{{locationState}}</div>
+            </div>
+        </div>
+
+        <div class="pb__gridFormRow">
+            <label class="pb__gridFormLabel">Reaction Time</label>
+            <div class="pb__gridFormInput">
+                <input type="number" [(ngModel)]="reactionTime" class="form-control" required
+                       placeholder="5..90 minutes"/>
+                <div *ngIf="reactionTimeState" class="pb__gridFormFeedback">{{reactionTimeState}}</div>
+            </div>
+        </div>
+
+        <div class="pb__gridFormRow">
+            <label class="pb__gridFormLabel">Sample Name</label>
+            <div class="pb__gridFormInput pb__gridFormInput--small">
+                <input type="text" [(ngModel)]="sampleName" class="form-control" required
+                       maxLength="64"
+                       placeholder="letters and numbers only"/>
+                <div *ngIf="sampleNameState" class="pb__gridFormFeedback">{{sampleNameState}}</div>
+            </div>
+        </div>
+
+        <div class="pb__gridFormRow pb__gridFormRow--buttons">
+            <button type="submit" [disabled]="!canAdd">Add Sample</button>
+        </div>
+    </section>
+</form>
+
+<div class="pb__grid">
+    <canvas id="grid" class="pb__canvas"
+            width="{{ table.width }}"
+            height="{{ table.height }}">
+    </canvas>
+</div>
