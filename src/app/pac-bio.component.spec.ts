@@ -26,16 +26,26 @@ describe('App: PacBio', () => {
     describe('Location', () => {
         let location;
 
-        beforeEach(() => location = Location.fromString('b4'));
+        describe('#columnFrom', () => {
+            it('should get a column from "1"', () => expect(Location.columnFrom('1')).toEqual(0));
+        });
+        
+        describe('#rowFrom', () => {
+            it('should get a row from "D"', () => expect(Location.rowFrom('D')).toEqual(3));
+        });
 
-        it('should have the expected row', () => expect(location.row).toEqual('B'));
-        it('should have the expected column', () => expect(location.column).toEqual(4));
-        it('should be valid', () => expect(location.valid).toBeTruthy());
+        beforeEach(() => {
+            location = Location.fromString('b4');
+        });
+
+        it('should have the expected i', () => expect(location.i).toEqual(3));
+        it('should have the expected j', () => expect(location.j).toEqual(1));
+        it('should not be invalid', () => expect(location.invalid).toBeFalsy());
 
         describe('(invalid)', () => {
             beforeEach(() => location = Location.fromString('4b'));
 
-            it('should be invalid', () => expect(location.valid).toBeFalsy());
+            it('should be invalid', () => expect(location.invalid).toBeTruthy());
         });
     });
 

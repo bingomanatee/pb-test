@@ -1,7 +1,14 @@
 import TableModel from './TableModel';
+import Entry from './Entry';
+import Location from './Location';
 
 const LINE_WIDTH = 4;
 const CIRCLE_RATIO = 0.9;
+
+
+interface Sample {
+    name:string;
+}
 
 export default class TableDrawer {
     private _context:CanvasRenderingContext2D;
@@ -55,7 +62,13 @@ export default class TableDrawer {
         if (this.context) {
             const box = this.box(i, j);
             this.context.save();
-            
+
+            const index:string = Location.indexFor(i - 1, j - 1);
+            let entry:Entry;
+            if (this.table.entries.has(index)) {
+                entry = this.table.entries.get(index);
+                console.log('found entry ', entry, 'at', index);
+            }
             this.context.fillStyle = 'black';
             this.context.lineWidth = LINE_WIDTH;
             const radius = box.minRadius * CIRCLE_RATIO;
@@ -63,8 +76,9 @@ export default class TableDrawer {
             this.context.beginPath();
             this.context.arc(box.centerX, box.centerY, radius, 0, 2 * Math.PI);
             this.context.closePath();
-            this.context.fillStyle = 'blue';
             this.context.stroke();
+            this.context.fillStyle = entry ? 'blue' : 'white';
+            this.context.fill();
 
             this.context.restore();
         }

@@ -34,14 +34,28 @@
         </div>
 
         <div class="pb__gridFormRow pb__gridFormRow--buttons">
-            <button type="submit" [disabled]="!canAdd">Add Sample</button>
+            <button type="button" (click)="addEntry()" [disabled]="!canAdd">Add Sample</button>
+            <button type="button" (click)="removeEntry()" [disabled]="!canClear">Clear Sample</button>
         </div>
     </section>
 </form>
 
 <div class="pb__grid">
-    <canvas id="grid" class="pb__canvas"
+    <canvas id="grid" class="pb__canvas" (click)="canvasClick($event)"
             width="{{ table.width }}"
             height="{{ table.height }}">
     </canvas>
 </div>
+
+<table>
+    <thead>
+    <th>i</th>
+    <th>j</th>
+    <th>index</th>
+    </thead>
+    <tr *ngFor="let entry of table.entryList">
+        <td>{{ entry.location.i }}</td>
+        <td>{{ entry.location.j }}</td>
+        <td>{{ entry.location.index }}</td>
+    </tr>
+</table>

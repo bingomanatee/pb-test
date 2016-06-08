@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import TableModel from './classes/TableModel';
 import TableDrawer from './classes/TableDrawer';
 import {NgForm}    from '@angular/common';
+import Entry from './classes/Entry';
+import Location from './classes/Location';
 
 const MIN_REACTION_TIME = 5;
 const MAX_REACTION_TIME = 90;
@@ -17,7 +19,7 @@ export class PacBioAppComponent {
     private _drawer:TableDrawer;
     private _location:string;
     private _locationPristine:boolean;
-    private _reactionTime:number;
+    private _reactionTime;
     private _reactionTimePristine:boolean;
     private _sampleName:string;
     private _sampleNamePristine:boolean;
@@ -36,9 +38,9 @@ export class PacBioAppComponent {
         return (!this._locationPristine)
             && (!this._reactionTimePristine)
             && (!this._sampleNamePristine)
-        && (!this.locationState)
-        && (!this.reactionTimeState)
-        && (!this.sampleNameState);
+            && (!this.locationState)
+            && (!this.reactionTimeState)
+            && (!this.sampleNameState);
     }
 
     set location(val) {
@@ -69,7 +71,7 @@ export class PacBioAppComponent {
             this._reactionTimePristine = false;
         }
 
-        this._reactionTime = parseInt(val) || 0;
+        this._reactionTime = val;
     }
 
     get reactionTime() {
@@ -135,5 +137,38 @@ export class PacBioAppComponent {
         return {
             color: 'red'
         };
+    }
+
+    addEntry() {
+        this.table.addEntry(this.location, this.reactionTime, this.sampleName);
+        this.drawer.draw();
+        this.reactionTime = null;
+        this._reactionTimePristine = true;
+    }
+
+    removeEntry() {
+        this.table.remove(this.location);
+        this.drawer.draw();
+    }
+
+    get canClear():boolean {
+        return Location.validString(this.location) && this.table.hasEntry(this.location);
+    }
+
+    canvasClick($event) {
+        let i = Math.floor($event.offsetX / this.table.columnWidth);
+        let j = Math.floor($event.offsetY / this.table.rowHeight);
+        if (i && j) {
+            --i;
+            --j;
+            if (this.table.hasEntryAtIJ(i, j)) {
+                const entry:Entry = this.table.getEntryAtIJ(i, j);
+                this.location = entry.index;
+                this.sampleName = entry.sample.name;
+                this.reactionTime = entry.reactionTime;
+            } else {
+                this.location = Location.indexFor(i, j);
+            }
+        }
     }
 }

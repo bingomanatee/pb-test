@@ -34,7 +34,7 @@ html {
     font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
     padding: 0.5rem;
     text-align: center;
-    min-width: 40rem;
+    min-width: 20rem;
 }
 
 .pb__gridFormRow.pb__gridFormRow--buttons button:active {
