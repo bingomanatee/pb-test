@@ -1,0 +1,122 @@
+html {
+  font-size: 100%; /* 16px */
+}
+
+.pb__canvas {
+}
+
+.pb_gridForm {
+  max-width: 500rem;
+  border: 1px solid gray;
+  margin: 0;
+  padding: 2rem;
+}
+
+.pb__gridFormRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.pb__gridFormRow.pb__gridFormRow--buttons {
+  justify-content: center;
+}
+
+.pb__gridFormRow.pb__gridFormRow--buttons button {
+  outline: none;
+  -webkit-appearance: none;
+
+  border: 1px solid darkblue;
+  background-color: lightblue;
+  color: darkblue;
+  font-size: 1.5rem;
+  font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
+  padding: 0.5rem;
+  text-align: center;
+  margin-right: 1rem;
+}
+
+.pb__gridFormRow.pb__gridFormRow--buttons button:active {
+  background-color: cyan;
+  color: black;
+}
+
+.pb__gridFormRow.pb__gridFormRow--buttons button:disabled {
+
+  border: 1px solid darkgray;
+  background-color: lightgrey;
+  color: grey;
+}
+
+.pb__gridFormLabel {
+  font-size: 1.5rem;
+  font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
+  color: rgba(0, 0, 0, 0.66);
+  flex-basis: 20rem;
+  flex-shrink: 1;
+  flex-grow: 1;
+  padding: 0.5rem;
+}
+
+.pb__gridFormInput {
+  font-size: 1.5rem;
+  font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
+  color: rgba(0, 0, 0, 0.66);
+  flex-basis: 40rem;
+  flex-shrink: 1;
+  flex-grow: 5;
+  padding: 0.5rem;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.pb__gridFormInput input {
+  font-size: 1.5rem;
+  font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
+  color: black;
+  font-weight: bold;
+  -webkit-appearance: none;
+  outline: none;
+  border: none;
+}
+
+.pb__gridFormInput.pb__gridFormInput--small input {
+  font-size: 1.25rem;
+  font-weight: normal;
+}
+
+.pb__gridFormFeedback {
+  color: darkred;
+  font-size: 1.5rem;
+  font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
+}
+
+@media screen and ( max-width: 800px) {
+
+  .pb__gridFormLabel {
+    font-size: 1rem;
+  }
+
+  .pb__gridFormInput {
+    font-size: 1rem;
+  }
+
+  .pb__gridFormInput input {
+    font-size: 1rem;
+  }
+
+  .pb__gridFormFeedback {
+    font-size: 0.75rem;
+  }
+
+  .pb__gridFormInput.pb__gridFormInput--small input {
+    font-size: 0.75rem;
+  }
+
+  .pb__gridFormRow.pb__gridFormRow--buttons button {
+    font-size: 1rem;
+  }
+}
